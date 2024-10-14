@@ -49,6 +49,15 @@ import { ProductsComponent } from "./products/products.component";
 import { ServiceWorkerModule } from "@angular/service-worker";
 import { AutocompleteComponent } from "./cv/autocomplete/autocomplete.component";
 import { SliderComponent } from "./rxjs/slider/slider.component";
+import { CvService } from "./cv/services/cv.service";
+import { APP_CONSTANTES } from "./config/app_const.config";
+import { FakeCvService } from "./cv/services/fake-cv.service";
+import { Logger_Token } from "./tokens/logger.token";
+import { LoggerService } from "./services/logger.service";
+import { Logger2Service } from "./services/logger2.service";
+
+import { v4 as uuidV4 } from 'uuid';
+import { UUID_Token } from "./tokens/uuid.token";
 
 @NgModule({
   declarations: [
@@ -98,19 +107,34 @@ import { SliderComponent } from "./rxjs/slider/slider.component";
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    ServiceWorkerModule.register("ngsw-worker.js", {
+    ServiceWorkerModule.register('ngsw-worker.js', {
       enabled: !isDevMode(),
       // Register the ServiceWorker as soon as the application is stable
       // or after 30 seconds (whichever comes first).
-      registrationStrategy: "registerWhenStable:30000",
+      registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
   providers: [
     AuthInterceptorProvider,
-    // {
-    //   provide: 'chneyaToken',
-    //   useClass: AnyClass
-    // }
+    {
+      // Ki wahed iest7a9 CvService
+      provide: CvService,
+      useClass: APP_CONSTANTES.env == 'production' ? CvService : FakeCvService,
+    },
+    {
+      provide: Logger_Token,
+      useClass: LoggerService,
+      multi: true
+    },
+    {
+      provide: Logger_Token,
+      useClass: Logger2Service,
+      multi: true
+    },
+    {
+      provide: UUID_Token,
+      useValue: uuidV4
+    }
   ],
   bootstrap: [AppComponent],
 })
