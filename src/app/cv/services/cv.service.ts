@@ -35,6 +35,7 @@ export class CvService {
    *
    */
   getCvs(): Observable<Cv[]> {
+    // return of(this.cvs);
     return this.http.get<Cv[]>(API.cv);
   }
 
