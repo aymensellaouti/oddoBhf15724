@@ -105,7 +105,13 @@ import { SliderComponent } from "./rxjs/slider/slider.component";
       registrationStrategy: "registerWhenStable:30000",
     }),
   ],
-  providers: [AuthInterceptorProvider],
+  providers: [
+    AuthInterceptorProvider,
+    // {
+    //   provide: 'chneyaToken',
+    //   useClass: AnyClass
+    // }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
