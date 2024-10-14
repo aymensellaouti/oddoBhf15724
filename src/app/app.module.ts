@@ -59,6 +59,7 @@ import { Logger2Service } from "./services/logger2.service";
 import { v4 as uuidV4 } from 'uuid';
 import { UUID_Token } from "./tokens/uuid.token";
 import { WeekTodoComponent } from './todo/week-todo/week-todo.component';
+import { MasterDetailComponent } from './cv/master-detail/master-detail.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +101,7 @@ import { WeekTodoComponent } from './todo/week-todo/week-todo.component';
     UserListComponent,
     ProductsComponent,
     WeekTodoComponent,
+    MasterDetailComponent,
   ],
   imports: [
     BrowserModule,
