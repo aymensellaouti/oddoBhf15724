@@ -10,6 +10,9 @@ import { TodoService } from '../service/todo.service';
 })
 export class TodoComponent {
   todos: Todo[] = [];
+  /**
+   * Le formulaire pour ajouter un todo
+   */
   todo = new Todo();
   constructor(private todoService: TodoService) {
     this.todos = this.todoService.getTodos();
