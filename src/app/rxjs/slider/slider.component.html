@@ -1,6 +1,9 @@
-<img
-  src="assets/images/{{paths$ | async}}"
+<ng-container *ngIf="paths$ | async as image">
+  <img
+  src="{{image.thumbnailUrl}}"
   [ngStyle]="{ width: 150, height: 150 }"
-  class="rounded-circle"
-  alt="NF404"
-/>
+    class="rounded-circle"
+    alt="{{image.title}}"
+  /> : {{image.title}}
+</ng-container>
+

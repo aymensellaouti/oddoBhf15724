@@ -16,10 +16,12 @@ import { APP_ROUTES } from 'src/config/routes.config';
 import { MasterDetailComponent } from './cv/master-detail/master-detail.component';
 import { cvsResolver } from './cv/resolvers/cvs.resolver';
 import { canLeaveGuard } from './todo/guards/can-leave.guard';
+import { SliderComponent } from './rxjs/slider/slider.component';
 
 const routes: Route[] = [
   { path: 'login', component: LoginComponent },
   { path: 'rh', component: RhComponent },
+  { path: APP_ROUTES.slider, component: SliderComponent },
   {
     path: APP_ROUTES.cv,
     children: [
