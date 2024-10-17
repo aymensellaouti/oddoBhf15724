@@ -16,7 +16,12 @@ export class MasterDetailComponent {
   router = inject(Router);
   acr = inject(ActivatedRoute);
   constructor() {
-    this.cvs = this.acr.snapshot.data['cvs']
+    this.cvs = this.acr.snapshot.data['cvs'];
+    this.cvService.selectedCv$.subscribe({
+      next: (cv) => {
+        this.router.navigate([cv.id], { relativeTo: this.acr });
+      },
+    });
     // this.cvService.getCvs().subscribe({
     //   next: (cvs) => {
     //     this.cvs = cvs;
@@ -30,7 +35,7 @@ export class MasterDetailComponent {
     // });
   }
 
-  showDetail(cv: Cv) {
-    this.router.navigate([cv.id], { relativeTo: this.acr});
-  }
+  // showDetail(cv: Cv) {
+
+  // }
 }

@@ -12,13 +12,13 @@ import { TodoService } from 'src/app/todo/service/todo.service';
 })
 export class CvComponent {
   //cvs: Cv[] = [];
-  selectedCv: Cv | null = null;
   /*   selectedCv: Cv | null = null; */
   date = new Date();
   logger = inject(LoggerService);
   toastr = inject(ToastrService);
   cvService = inject(CvService);
   todoService = inject(TodoService);
+  selectedCv$ = this.cvService.selectedCv$;
   /**
    * Le flux des cvs récupérés via le API
    */
@@ -49,7 +49,7 @@ export class CvComponent {
     // this.logger.logger("je suis le cvComponent");
     this.toastr.info('Bienvenu dans notre CvTech');
   }
-  onForwardCv(cv: Cv) {
-    this.selectedCv = cv;
-  }
+  // onForwardCv(cv: Cv) {
+  //   this.selectedCv = cv;
+  // }
 }
