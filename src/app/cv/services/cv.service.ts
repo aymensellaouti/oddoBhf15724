@@ -29,7 +29,7 @@ export class CvService {
 
   /**
    *
-   * Retourne la liste des cvs de l'API
+   * Retourne le flux de la liste des cvs de l'API
    *
    * @returns CV[]
    *
