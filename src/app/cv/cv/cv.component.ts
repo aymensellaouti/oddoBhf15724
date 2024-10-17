@@ -3,7 +3,7 @@ import { Cv } from '../model/cv';
 import { LoggerService } from '../../services/logger.service';
 import { ToastrService } from 'ngx-toastr';
 import { CvService } from '../services/cv.service';
-import { EMPTY, Observable, catchError, of, retry } from 'rxjs';
+import { EMPTY, Observable, catchError, map, of, retry, share } from 'rxjs';
 import { TodoService } from 'src/app/todo/service/todo.service';
 @Component({
   selector: 'app-cv',
@@ -25,15 +25,18 @@ export class CvComponent {
   cvs$ = this.cvService.getCvs().pipe(
     retry({
       count: 4,
-      delay: 3000
+      delay: 3000,
     }),
     catchError((e) => {
       this.toastr.error(`
            Attention!! Les données sont fictives, problème avec le serveur.
            Veuillez contacter l'admin.`);
       return of(this.cvService.getFakeCvs());
-    })
+    }),
+    share()
   );
+  juniors$ = this.cvs$.pipe(map((cvs) => cvs.filter((cv) => cv.age < 18)));
+  seniors$ = this.cvs$.pipe(map((cvs) => cvs.filter((cv) => cv.age >= 18)));
   constructor() {
     // this.cvService.getCvs().subscribe({
     //   next: (cvs) => {
