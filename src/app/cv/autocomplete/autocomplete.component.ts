@@ -18,6 +18,8 @@ export class AutocompleteComponent {
   /**
    * Le flux des cvs à afficher dans l'autcomplete
    */
-  cvs$ = this.search.valueChanges.pipe();
+  cvs$ = this.search.valueChanges.pipe(
+    tap(() => console.log(this.search.value))
+  )
   constructor() {}
 }
