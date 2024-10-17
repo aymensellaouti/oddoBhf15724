@@ -1,9 +1,11 @@
 <ng-container
   *ngIf="(products$ | async) as productsList, else loading"
 >
-<button (click)="moreProducts()" class="btn btn-primary"> More Products</button>
+<button  [disabled]="noMoreProducts" (click)="moreProducts()" class="btn btn-primary">
+  {{title}}
+</button>
 <div class="alert alert-warning">
-  Product Number: {{productsList?.length}}
+  Product Number: {{productsList?.length}} | {{maxResponseLegth}}
 </div>
 <div class="row">
   <div class="col-4" *ngFor="let product of productsList">
