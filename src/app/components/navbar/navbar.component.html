@@ -7,6 +7,7 @@
       routerLinkActive="active text-primary"
       >cvStartingAdvProject</a
     >
+    {{(authService.user$ | async)?.email ?? 'Anonyme' }}
     <button
       class="navbar-toggler"
       type="button"
@@ -36,7 +37,7 @@
           >Cv</a
         >
         <a
-          *ngIf="authService.isAuthenticated()"
+          *ngIf="authService.isLoggedIn$ | async"
           class="nav-link"
           [routerLink]="['cv/add']"
           routerLinkActive="active text-primary"
@@ -79,14 +80,14 @@
           >Rh</a
         >
         <a
-          *ngIf="!authService.isAuthenticated()"
+          *ngIf="authService.IsLoggedOut$ | async"
           class="nav-link"
           [routerLink]="['login']"
           routerLinkActive="active text-primary"
           >Login</a
         >
         <a
-          *ngIf="authService.isAuthenticated()"
+          *ngIf="authService.isLoggedIn$ | async"
           class="nav-link"
           (click)="logout()"
           >Logout</a
