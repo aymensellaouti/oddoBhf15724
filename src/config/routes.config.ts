@@ -1,5 +1,6 @@
 export const APP_ROUTES = {
   cv: 'cv',
   login: 'login',
-  slider: 'slider'
+  slider: 'slider',
+  products: 'products'
 };
