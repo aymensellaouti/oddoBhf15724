@@ -51,6 +51,8 @@ import { v4 as uuidV4 } from 'uuid';
 import { UUID_Token } from "./tokens/uuid.token";
 import { CdComponent } from './cdTest/cd/cd.component';
 import { CdFilsComponent } from './cdTest/cd-fils/cd-fils.component';
+import { UserListElementsComponent } from './optimizationPattern/user-list-elements/user-list-elements.component';
+import { FiboPipe } from './pipes/fibo.pipe';
 
 
 @NgModule({
@@ -84,6 +86,8 @@ import { CdFilsComponent } from './cdTest/cd-fils/cd-fils.component';
     ProductsComponent,
     CdComponent,
     CdFilsComponent,
+    UserListElementsComponent,
+    FiboPipe,
 
   ],
   imports: [
