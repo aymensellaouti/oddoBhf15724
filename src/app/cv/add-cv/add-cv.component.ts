@@ -66,7 +66,17 @@ export class AddCvComponent {
       },
       takeUntilDestroyed()
     )).subscribe();
-  }
+
+    // La gestion du cache du formulaire
+    /**
+     * Bech nthabet doub ma tet7al el page :
+     * 1- Itha kan 3andi un form mkhabi fel localStorage
+     *    => bech npatchi el form mta3i bel valeur haki
+     * 2- Sinon ma 3andi ma na3mel
+     */
+    // Lazemni zada dima nthabet ki ietbadel el status ou howa validators
+    // Nesta7fedh bel statuis (value) mta3 el fomr fel localstorage
+    }
   addCv() {
     // this.cvService.addCv(this.form.value as Cv).subscribe({
     //   next: (cv) => {
@@ -81,6 +91,7 @@ export class AddCvComponent {
       .addCv(this.form.value as Cv)
       .pipe(
         tap((cv) => {
+          // Kol ma nvalidi l'ajout je vide le localstorage
           this.router.navigate([APP_ROUTES.cv]);
           this.toastr.success(`Le cv ${cv.firstname} ${cv.name}`);
         }),
