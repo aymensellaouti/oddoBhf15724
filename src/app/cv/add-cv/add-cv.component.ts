@@ -8,6 +8,7 @@ import { APP_ROUTES } from "src/config/routes.config";
 import { Cv } from "../model/cv";
 import { CvService } from "../services/cv.service";
 import { APP_CONSTANTES } from "src/app/config/app_const.config";
+import { uniqueCinValidator } from "src/app/async validators/unique-cin.validator";
 
 @Component({
   selector: 'app-add-cv',
@@ -29,14 +30,15 @@ export class AddCvComponent {
         '',
         {
           validators: [Validators.required, Validators.pattern('[0-9]{8}')],
-          asyncValidators: []
+          asyncValidators: [uniqueCinValidator(this.cvService)],
+          updateOn: 'blur'
         },
       ],
       age: [
         0,
         {
           validators: [Validators.required],
-          updateOn: 'blur'
+          updateOn: 'blur',
         },
       ],
     },
@@ -60,13 +62,14 @@ export class AddCvComponent {
     //   }
     // })
     //V2
-    this.age.valueChanges.pipe(
-      tap((age) => {
-        if (age < 18) this.path?.disable();
-        else this.path?.enable();
-      },
-      takeUntilDestroyed()
-    )).subscribe();
+    this.age.valueChanges
+      .pipe(
+        tap((age) => {
+          if (age < 18) this.path?.disable();
+          else this.path?.enable();
+        }, takeUntilDestroyed())
+      )
+      .subscribe();
 
     // La gestion du cache du formulaire
     /**
@@ -78,21 +81,27 @@ export class AddCvComponent {
 
     /**
      * Je récupére le formulaire sauvgardé dans le local storage
-    */
-   const addCvForm = localStorage.getItem(APP_CONSTANTES.addCvForm);
-   if(addCvForm) {
-     this.form.patchValue(JSON.parse(addCvForm));
+     */
+    const addCvForm = localStorage.getItem(APP_CONSTANTES.addCvForm);
+    if (addCvForm) {
+      this.form.patchValue(JSON.parse(addCvForm));
     }
 
     // Lazemni zada dima nthabet ki ietbadel el status ou howa validators
     // Nesta7fedh bel statuis (value) mta3 el fomr fel localstorage
-    this.form.statusChanges.pipe(
-      filter( _ => this.form.valid),
-      tap(() => localStorage.setItem(APP_CONSTANTES.addCvForm, JSON.stringify(this.form.value))),
-      takeUntilDestroyed()
-    ).subscribe();
-
-    }
+    this.form.statusChanges
+      .pipe(
+        filter((_) => this.form.valid),
+        tap(() =>
+          localStorage.setItem(
+            APP_CONSTANTES.addCvForm,
+            JSON.stringify(this.form.value)
+          )
+        ),
+        takeUntilDestroyed()
+      )
+      .subscribe();
+  }
   addCv() {
     // this.cvService.addCv(this.form.value as Cv).subscribe({
     //   next: (cv) => {
