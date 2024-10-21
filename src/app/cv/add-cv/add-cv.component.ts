@@ -35,6 +35,7 @@ export class AddCvComponent {
         0,
         {
           validators: [Validators.required],
+          updateOn: 'blur'
         },
       ],
     },
@@ -43,7 +44,29 @@ export class AddCvComponent {
       asyncValidators: [],
     }
   );
-  constructor() {}
+  constructor() {
+    // Gestion de la partie age
+    /**
+     * Bech nekhdmou kol ma ietbadel l'age
+     * Itha kan l'age a9al men 18 bech ndisabli el path
+     * Sinon bech nenablihb
+     */
+    //V1
+    // this.age.valueChanges.subscribe({
+    //   next: (age) => {
+    //     if (age < 18) this.path?.disable()
+    //     else this.path?.enable()
+    //   }
+    // })
+    //V2
+    this.age.valueChanges.pipe(
+      tap((age) => {
+        if (age < 18) this.path?.disable();
+        else this.path?.enable();
+      },
+      takeUntilDestroyed()
+    )).subscribe();
+  }
   addCv() {
     // this.cvService.addCv(this.form.value as Cv).subscribe({
     //   next: (cv) => {
