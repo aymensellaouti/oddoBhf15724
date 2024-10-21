@@ -7,7 +7,7 @@ import { CommonModule } from "@angular/common";
 
 export const TODO_ROUTES: Routes = [
   {
-    path: 'todo',
+    path: '',
     component: TodoComponent,
     canDeactivate: [canLeaveGuard],
   },

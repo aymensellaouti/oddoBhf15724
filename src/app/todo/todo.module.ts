@@ -11,4 +11,4 @@ import { CommonModule } from "@angular/common";
   declarations: [TodoComponent, WeekTodoComponent],
   imports: [TodoRoutingModule, FormsModule, CommonModule],
 })
-export class TodoModule {}
+export default class TodoModule {}
