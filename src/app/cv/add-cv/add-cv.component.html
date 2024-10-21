@@ -3,7 +3,7 @@
   Name:
   <input type="text" class="form-control" formControlName="name" />
   <div
-    *ngIf="form.get('name')?.errors && form.get('name')?.touched"
+    *ngIf="name?.errors && name?.touched"
     class="alert alert-danger"
   >
     Ce champ est obligatoire
@@ -12,14 +12,6 @@
   <input type="text" class="form-control" formControlName="firstname" /> Age:
   <input type="text" class="form-control" formControlName="age" /> Cin:
   <input type="text" class="form-control" formControlName="cin" />
-  <div
-    *ngIf="
-      form.errors && form.errors['cinFirstCars'] && cin?.touched && age?.touched
-    "
-    class="alert alert-danger"
-  >
-    Cette Cin est invalide
-  </div>
   Job: <input type="text" class="form-control" formControlName="job" /> Path:
   <input type="text" class="form-control" formControlName="path" />
 

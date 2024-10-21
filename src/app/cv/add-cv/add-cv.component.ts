@@ -28,7 +28,7 @@ export class AddCvComponent {
         '',
         {
           validators: [Validators.required, Validators.pattern('[0-9]{8}')],
-          asyncValidators: [],
+          asyncValidators: []
         },
       ],
       age: [
