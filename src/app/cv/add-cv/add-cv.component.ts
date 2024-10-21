@@ -7,6 +7,7 @@ import { tap, filter, catchError, EMPTY } from "rxjs";
 import { APP_ROUTES } from "src/config/routes.config";
 import { Cv } from "../model/cv";
 import { CvService } from "../services/cv.service";
+import { APP_CONSTANTES } from "src/app/config/app_const.config";
 
 @Component({
   selector: 'app-add-cv',
@@ -74,8 +75,23 @@ export class AddCvComponent {
      *    => bech npatchi el form mta3i bel valeur haki
      * 2- Sinon ma 3andi ma na3mel
      */
+
+    /**
+     * Je récupére le formulaire sauvgardé dans le local storage
+    */
+   const addCvForm = localStorage.getItem(APP_CONSTANTES.addCvForm);
+   if(addCvForm) {
+     this.form.patchValue(JSON.parse(addCvForm));
+    }
+
     // Lazemni zada dima nthabet ki ietbadel el status ou howa validators
     // Nesta7fedh bel statuis (value) mta3 el fomr fel localstorage
+    this.form.statusChanges.pipe(
+      filter( _ => this.form.valid),
+      tap(() => localStorage.setItem(APP_CONSTANTES.addCvForm, JSON.stringify(this.form.value))),
+      takeUntilDestroyed()
+    ).subscribe();
+
     }
   addCv() {
     // this.cvService.addCv(this.form.value as Cv).subscribe({
@@ -92,6 +108,7 @@ export class AddCvComponent {
       .pipe(
         tap((cv) => {
           // Kol ma nvalidi l'ajout je vide le localstorage
+          localStorage.removeItem(APP_CONSTANTES.addCvForm);
           this.router.navigate([APP_ROUTES.cv]);
           this.toastr.success(`Le cv ${cv.firstname} ${cv.name}`);
         }),
