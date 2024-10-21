@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Route } from '@angular/router';
-import { TodoComponent } from './todo/todo/todo.component';
 import { MiniWordComponent } from './directives/mini-word/mini-word.component';
 import { ColorComponent } from './components/color/color.component';
 import { FrontComponent } from './templates/front/front.component';
@@ -15,7 +14,6 @@ import { RhComponent } from './optimizationPattern/rh/rh.component';
 import { APP_ROUTES } from 'src/config/routes.config';
 import { MasterDetailComponent } from './cv/master-detail/master-detail.component';
 import { cvsResolver } from './cv/resolvers/cvs.resolver';
-import { canLeaveGuard } from './todo/guards/can-leave.guard';
 import { SliderComponent } from './rxjs/slider/slider.component';
 import { ProductsComponent } from './products/products.component';
 
@@ -50,11 +48,6 @@ const routes: Route[] = [
     path: '',
     component: FrontComponent,
     children: [
-      {
-        path: 'todo',
-        component: TodoComponent,
-        canDeactivate: [canLeaveGuard],
-      },
       { path: 'word', component: MiniWordComponent },
     ],
   },

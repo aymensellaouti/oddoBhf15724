@@ -9,6 +9,7 @@ import { Cv } from "../model/cv";
 import { CvService } from "../services/cv.service";
 import { APP_CONSTANTES } from "src/app/config/app_const.config";
 import { uniqueCinValidator } from "src/app/async validators/unique-cin.validator";
+import { ageCinValidator } from "src/app/validators/age-cin.validator";
 
 @Component({
   selector: 'app-add-cv',
@@ -31,7 +32,7 @@ export class AddCvComponent {
         {
           validators: [Validators.required, Validators.pattern('[0-9]{8}')],
           asyncValidators: [uniqueCinValidator(this.cvService)],
-          updateOn: 'blur'
+          updateOn: 'blur',
         },
       ],
       age: [
@@ -43,7 +44,7 @@ export class AddCvComponent {
       ],
     },
     {
-      validators: [],
+      validators: [ageCinValidator],
       asyncValidators: [],
     }
   );

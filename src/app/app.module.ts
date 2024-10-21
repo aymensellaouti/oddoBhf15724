@@ -22,7 +22,6 @@ import { DetailsCvComponent } from "./cv/details-cv/details-cv.component";
 import { NgstyleComponent } from "./directives/ngstyle/ngstyle.component";
 import { MiniWordComponent } from "./directives/mini-word/mini-word.component";
 import { NgclassComponent } from "./directives/ngclass/ngclass.component";
-import { TodoComponent } from "./todo/todo/todo.component";
 
 import { HighlightDirective } from "./directives/highlight.directive";
 import { RainbowDirective } from "./directives/rainbow.directive";
@@ -58,8 +57,8 @@ import { Logger2Service } from "./services/logger2.service";
 
 import { v4 as uuidV4 } from 'uuid';
 import { UUID_Token } from "./tokens/uuid.token";
-import { WeekTodoComponent } from './todo/week-todo/week-todo.component';
 import { MasterDetailComponent } from './cv/master-detail/master-detail.component';
+import { TodoModule } from "./todo/todo.module";
 
 @NgModule({
   declarations: [
@@ -87,7 +86,6 @@ import { MasterDetailComponent } from './cv/master-detail/master-detail.componen
     HighlightDirective,
     RainbowDirective,
     Btc2usdPipe,
-    TodoComponent,
     NavbarComponent,
     FrontComponent,
     AdminComponent,
@@ -100,7 +98,6 @@ import { MasterDetailComponent } from './cv/master-detail/master-detail.componen
     RhComponent,
     UserListComponent,
     ProductsComponent,
-    WeekTodoComponent,
     MasterDetailComponent,
   ],
   imports: [
@@ -108,6 +105,7 @@ import { MasterDetailComponent } from './cv/master-detail/master-detail.componen
     FormsModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(), // ToastrModule added
+    TodoModule,
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
